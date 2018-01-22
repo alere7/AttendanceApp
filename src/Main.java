@@ -36,5 +36,6 @@ public class Main {
 
         System.out.println("## The Problem Statement ##");
         System.out.println("absences: " + attendence());
+
     }
 }
