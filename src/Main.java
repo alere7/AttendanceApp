@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,11 +11,11 @@ public class Main {
         public static ArrayList<Integer> rollcall;
         public static int absences;
         public static int num = 8;
+        Scanner in = new Scanner(System.in);
+        static Random rand = new Random();
 
-        //Milestone 1 ==> absences
         private static ArrayList<Integer> attendence(){
             rollcall = new ArrayList<>();
-            Random rand = new Random();
 
             for (int i = 0; i < num; i++) {
                 absences = rand.nextInt(20)+1;
@@ -33,17 +34,15 @@ public class Main {
         }
 
         private static void printRollcall(){
-            System.out.print("absences: ");
             for (int i = 0; i < rollcall.size(); i++) {
                 if (i == rollcall.size()-1)
-                    System.out.print(rollcall.get(i));
+                    System.out.println(rollcall.get(i));
                 else
                     System.out.print(rollcall.get(i)+ ", " ) ;
             }
         }
 
         private static int countElements(ArrayList<Integer> rc){
-            Scanner in = new Scanner(System.in);
             int total = 0;
             int i;
 
@@ -53,12 +52,52 @@ public class Main {
             return total;
         }
 
+        private static ArrayList<Integer> updateElement(ArrayList<Integer> rc, int i, int newValue){
+            rc.set(i, newValue);
+            return rc;
+        }
+
+        private static ArrayList<Integer> sortElementsSTL(ArrayList<Integer> rc){
+            Collections.sort(rc);
+            return rc;
+        }
+
+        private static ArrayList<Integer> sortElementsLTS(ArrayList<Integer> rc){
+            Collections.reverse(rc);
+            return rc;
+        }
+
+        private static ArrayList<Integer> shuffleElements(ArrayList<Integer> rc){
+            int temp;
+            int n = rand.nextInt(num);
+//            for (int i = 0; i < num; i++) {
+//                temp = rc.get(i);
+//                rc.get(i) = rc.get(n);
+//                rc.get(n) = temp;
+//            }
+            return rc;
+        }
+
 
     public static void main(String[] args) {
         System.out.println("\n\nHi, AttendanceApp!\n");
 
         System.out.println("## The Problem Statement ##");
         attendence();
+
+        System.out.println("Original List:");
+        printRollcall();
+
+        updateElement(rollcall, 3, 13);
+        System.out.println("Updated List:");
+        printRollcall();
+
+        sortElementsSTL(rollcall);
+        System.out.println("Sorted List (Smallest to Largest):");
+        printRollcall();
+
+        sortElementsLTS(rollcall);
+        System.out.println("Sorted List (Largest to Smallest):");
         printRollcall();
     }
 }
