@@ -68,13 +68,7 @@ public class Main {
         }
 
         private static ArrayList<Integer> shuffleElements(ArrayList<Integer> rc){
-            int temp;
-            int n = rand.nextInt(num);
-//            for (int i = 0; i < num; i++) {
-//                temp = rc.get(i);
-//                rc.get(i) = rc.get(n);
-//                rc.get(n) = temp;
-//            }
+            Collections.shuffle(rc, rand);
             return rc;
         }
 
@@ -82,11 +76,12 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("\n\nHi, AttendanceApp!\n");
 
-        System.out.println("## The Problem Statement ##");
+        System.out.println("### The Problem Statement ###");
         attendence();
 
         System.out.println("Original List:");
         printRollcall();
+
 
         updateElement(rollcall, 3, 13);
         System.out.println("Updated List:");
@@ -98,6 +93,10 @@ public class Main {
 
         sortElementsLTS(rollcall);
         System.out.println("Sorted List (Largest to Smallest):");
+        printRollcall();
+
+        shuffleElements(rollcall);
+        System.out.println("Shuffled List:");
         printRollcall();
     }
 }
