@@ -56,16 +56,16 @@ public class Main {
             System.out.print("Would you like to update one of the attendences? (y/n) ");
             String answer = in.next();
 
-            do {
+            if (answer.equals("y")){
                 System.out.print("Choose the absensce index to update: ");
                 int i = in.nextInt();
                 System.out.print("Give the new absent value: ");
                 int newValue = in.nextInt();
                 rc.set(i, newValue);
+                return updateElement(rc);
             }
-            while(answer.equals('y'));
-
-            return rc;
+            else
+                return rc;
         }
 
         private static ArrayList<Integer> sortElementsSTL(ArrayList<Integer> rc){
