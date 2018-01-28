@@ -52,8 +52,19 @@ public class Main {
             return total;
         }
 
-        private static ArrayList<Integer> updateElement(ArrayList<Integer> rc, int i, int newValue){
-            rc.set(i, newValue);
+        private static ArrayList<Integer> updateElement(ArrayList<Integer> rc){
+            System.out.print("Would you like to update one of the attendences? (y/n) ");
+            String answer = in.next();
+
+            do {
+                System.out.print("Choose the absensce index to update: ");
+                int i = in.nextInt();
+                System.out.print("Give the new absent value: ");
+                int newValue = in.nextInt();
+                rc.set(i, newValue);
+            }
+            while(answer.equals('y'));
+
             return rc;
         }
 
@@ -97,8 +108,6 @@ public class Main {
         }
 
         private static void makeAnUpdate(){
-            System.out.println("Would you like to update one of the attendences?");
-            String answer = in.next();
 
         }
 
@@ -114,7 +123,7 @@ public class Main {
 
 
 
-        updateElement(rollcall, 3, 13);
+        updateElement(rollcall);
         System.out.println("Updated List:");
         printRollcall();
 
