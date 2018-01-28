@@ -107,10 +107,6 @@ public class Main {
             return rc;
         }
 
-        private static void makeAnUpdate(){
-
-        }
-
 
     public static void main(String[] args) {
         System.out.println("\n\nHi, AttendanceApp!\n");
