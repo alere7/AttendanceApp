@@ -11,7 +11,7 @@ public class Main {
         public static ArrayList<Integer> rollcall;
         public static int absences;
         public static int num = 8;
-        Scanner in = new Scanner(System.in);
+        static Scanner in = new Scanner(System.in);
         static Random rand = new Random();
 
         private static ArrayList<Integer> attendence(){
@@ -58,18 +58,48 @@ public class Main {
         }
 
         private static ArrayList<Integer> sortElementsSTL(ArrayList<Integer> rc){
-            Collections.sort(rc);
+            //Collections.sort(rc);
+
+            for (int i = 0; i < rc.size(); i++) {
+                for (int j = 0; j < rc.size()-1; j++) {
+                    int num1 = rc.get(i);
+                    int num2 = rc.get(j);
+                    if (rc.get(i) < rc.get(j)){
+                        int temp = num1;
+                        rc.set(i,num2);
+                        rc.set(j, temp);
+                    }
+                }
+            }
             return rc;
         }
 
         private static ArrayList<Integer> sortElementsLTS(ArrayList<Integer> rc){
-            Collections.reverse(rc);
+            //Collections.reverse(rc);
+
+            for (int i = 0; i < rc.size(); i++) {
+                for (int j = 0; j < rc.size()-1; j++) {
+                    int num1 = rc.get(i);
+                    int num2 = rc.get(j);
+                    if (rc.get(j) < rc.get(i)){
+                        int temp = num1;
+                        rc.set(i,num2);
+                        rc.set(j, temp);
+                    }
+                }
+            }
             return rc;
         }
 
         private static ArrayList<Integer> shuffleElements(ArrayList<Integer> rc){
             Collections.shuffle(rc, rand);
             return rc;
+        }
+
+        private static void makeAnUpdate(){
+            System.out.println("Would you like to update one of the attendences?");
+            String answer = in.next();
+
         }
 
 
@@ -81,6 +111,7 @@ public class Main {
 
         System.out.println("Original List:");
         printRollcall();
+
 
 
         updateElement(rollcall, 3, 13);
