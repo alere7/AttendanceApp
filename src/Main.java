@@ -11,6 +11,7 @@ public class Main {
         public static ArrayList<Integer> rollcall;
         public static int absences;
         public static int num = 8;
+        public static String name;
         static Scanner in = new Scanner(System.in);
         static Random rand = new Random();
 
@@ -23,14 +24,6 @@ public class Main {
             }
 
             return rollcall;
-        }
-
-        private static ArrayList<Integer> getRollcall() {
-            return rollcall;
-        }
-
-        private static void setRollcall(ArrayList<Integer> rollcall) {
-            Main.rollcall = rollcall;
         }
 
         private static void printRollcall(){
@@ -107,17 +100,24 @@ public class Main {
             return rc;
         }
 
+        private static String scanUsersName(){
+            name = in.next();
+            return name;
+        }
+
+        private static String getUsersName(){
+            return name;
+        }
 
     public static void main(String[] args) {
-        System.out.println("\n\nHi, AttendanceApp!\n");
+        System.out.print("Please state your name: ");
+        scanUsersName();
+        System.out.println("Hi " + getUsersName() + ", Welcome to AttendanceApp!\n");
 
-        System.out.println("### The Problem Statement ###");
         attendence();
 
         System.out.println("Original List:");
         printRollcall();
-
-
 
         updateElement(rollcall);
         System.out.println("Updated List:");
