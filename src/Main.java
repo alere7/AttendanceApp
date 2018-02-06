@@ -10,16 +10,17 @@ public class Main {
      */
         public static ArrayList<Integer> rollcall;
         public static int absences;
-        public static int num = 8;
         public static String name;
+        public static int perfAttend;
+        public static double attendAvg;
         static Scanner in = new Scanner(System.in);
         static Random rand = new Random();
 
         private static ArrayList<Integer> attendence(){
             rollcall = new ArrayList<>();
 
-            for (int i = 0; i < num; i++) {
-                absences = rand.nextInt(20)+1;
+            for (int i = 0; i < name.length(); i++) {
+                absences = rand.nextInt(11);
                 rollcall.add(absences);
             }
 
@@ -35,18 +36,8 @@ public class Main {
             }
         }
 
-        private static int countElements(ArrayList<Integer> rc){
-            int total = 0;
-            int i;
-
-            //todo: until i figure out whos absences i should be counting, do i do it by counting random indexes?
-
-
-            return total;
-        }
-
         private static ArrayList<Integer> updateElement(ArrayList<Integer> rc){
-            System.out.print("Would you like to update one of the attendences? (y/n) ");
+            System.out.print("\nWould you like to update one of the attendences? (y/n) ");
             String answer = in.next();
 
             if (answer.equals("y")){
@@ -109,6 +100,37 @@ public class Main {
             return name;
         }
 
+        private static int countTotalPerfAttend(ArrayList<Integer> rc){
+        perfAttend = 0;
+
+        for (int i = 0; i < rc.size(); i++) {
+            if (rc.get(i) == 0)
+                perfAttend++;
+        }
+
+        return perfAttend;
+    }
+
+        private static void printTotalPerfAttend(){
+            System.out.println("Total Perfect Attendences:  " + perfAttend );
+        }
+
+        private static double attendenceAvg(ArrayList<Integer> rc){
+            attendAvg = 0;
+
+            for (int i = 0; i < rc.size(); i++) {
+                attendAvg = attendAvg + rc.get(i);
+            }
+
+            attendAvg = attendAvg/rc.size();
+
+            return attendAvg;
+        }
+
+        private static void printAttendenceAvg(){
+            System.out.println("Attendence Average: " + attendAvg);
+        }
+
     public static void main(String[] args) {
         System.out.print("Please state your name: ");
         scanUsersName();
@@ -118,6 +140,10 @@ public class Main {
 
         System.out.println("Original List:");
         printRollcall();
+        countTotalPerfAttend(rollcall);
+        printTotalPerfAttend();
+        attendenceAvg(rollcall);
+        printAttendenceAvg();
 
         updateElement(rollcall);
         System.out.println("Updated List:");
