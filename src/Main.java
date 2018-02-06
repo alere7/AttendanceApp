@@ -13,6 +13,7 @@ public class Main {
         public static String name;
         public static int perfAttend;
         public static double attendAvg;
+        public static double attendPrecent;
         static Scanner in = new Scanner(System.in);
         static Random rand = new Random();
 
@@ -131,6 +132,23 @@ public class Main {
             System.out.println("Attendence Average: " + attendAvg);
         }
 
+        private static double studentsAttendPrecent(ArrayList<Integer> rc){
+            attendPrecent = 0;
+
+            for (int i = 0; i < rc.size(); i++) {
+                if (rc.get(i) < 3)
+                    attendPrecent++;
+            }
+
+            attendPrecent = (attendPrecent/rc.size())*100;
+
+            return attendPrecent;
+        }
+
+        private static void printstudentAttendPrecent(){
+            System.out.println("Precentage of Students (less than 3 absences): " + attendPrecent + "%");
+        }
+
     public static void main(String[] args) {
         System.out.print("Please state your name: ");
         scanUsersName();
@@ -144,6 +162,8 @@ public class Main {
         printTotalPerfAttend();
         attendenceAvg(rollcall);
         printAttendenceAvg();
+        studentsAttendPrecent(rollcall);
+        printstudentAttendPrecent();
 
         updateElement(rollcall);
         System.out.println("Updated List:");
