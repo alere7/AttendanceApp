@@ -9,11 +9,13 @@ public class Main {
      * ralex1 on 1/10/2018.
      */
         public static ArrayList<Integer> rollcall;
+        public static ArrayList<Integer> students;
         public static int absences;
         public static String name;
         public static int perfAttend;
         public static double attendAvg;
         public static double attendPrecent;
+        public static int absenceNum;
         static Scanner in = new Scanner(System.in);
         static Random rand = new Random();
 
@@ -134,19 +136,45 @@ public class Main {
 
         private static double studentsAttendPrecent(ArrayList<Integer> rc){
             attendPrecent = 0;
-
+            int perfect = 0;
             for (int i = 0; i < rc.size(); i++) {
-                if (rc.get(i) < 3)
+                if (rc.get(i) < 3) {
                     attendPrecent++;
+                    if (rc.get(i) == 0)
+                        perfect++;
+                }
             }
 
-            attendPrecent = (attendPrecent/rc.size())*100;
+            attendPrecent = (perfect/attendPrecent)*100;
 
             return attendPrecent;
         }
 
         private static void printstudentAttendPrecent(){
-            System.out.println("Precentage of Students (less than 3 absences): " + attendPrecent + "%");
+            System.out.println("Precentage of Students (perfect attendence compared to less than 3 absences): "
+                    + attendPrecent + "%");
+        }
+
+        private static ArrayList<Integer> findStudentsByAbsence(ArrayList<Integer> rc){
+            System.out.print("What number for the absences are you looking for (1-10): ");
+            absenceNum = in.nextInt();
+
+            students = new ArrayList<>();
+
+            for (int i = 0; i < rc.size(); i++) {
+                if (absenceNum == rc.get(i)){
+                    students.add(i);
+                }
+            }
+
+            return students;
+        }
+
+        private static void printStudentsByAbsence(){
+            System.out.println("The students with " + absenceNum + " are: ");
+            for (int i = 0; i < students.size(); i++) {
+                System.out.println("student " + students.get(i) + " ");
+            }
         }
 
     public static void main(String[] args) {
@@ -164,6 +192,8 @@ public class Main {
         printAttendenceAvg();
         studentsAttendPrecent(rollcall);
         printstudentAttendPrecent();
+        findStudentsByAbsence(rollcall);
+        printStudentsByAbsence();
 
         updateElement(rollcall);
         System.out.println("Updated List:");
