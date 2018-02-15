@@ -173,8 +173,30 @@ public class Main {
         private static void printStudentsByAbsence(){
             System.out.println("The students with " + absenceNum + " are: ");
             for (int i = 0; i < students.size(); i++) {
-                System.out.println("student " + students.get(i) + " ");
+                System.out.println("Student " + students.get(i) + " ");
             }
+        }
+
+        private static int findStudentsFE(ArrayList<Integer> rc){
+            System.out.print("How many classes can be missed before a student FE's? ");
+            int FE = in.nextInt();
+            int count = 0;
+
+            for (int i = 0; i < rc.size(); i++) {
+                if (FE < rc.get(i)){
+                    System.out.println("Student " + i + " FE'ed");
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        private static void findPercentStudentsFE(ArrayList<Integer> rc){
+            int FEedStudents = findStudentsFE(rc);
+            double FEPercentage = ((double)FEedStudents/rc.size())*100;
+
+            System.out.printf("\nFormatted %d divided by %d is %.2f%%",
+                    FEedStudents, rc.size(), FEPercentage);
         }
 
     public static void main(String[] args) {
@@ -194,6 +216,7 @@ public class Main {
         printstudentAttendPrecent();
         findStudentsByAbsence(rollcall);
         printStudentsByAbsence();
+        findPercentStudentsFE(rollcall);
 
         updateElement(rollcall);
         System.out.println("Updated List:");
