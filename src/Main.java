@@ -16,6 +16,7 @@ public class Main {
         public static double attendAvg;
         public static double attendPrecent;
         public static int absenceNum;
+        public static int num;
         static Scanner in = new Scanner(System.in);
         static Random rand = new Random();
 
@@ -56,8 +57,6 @@ public class Main {
         }
 
         private static ArrayList<Integer> sortElementsSTL(ArrayList<Integer> rc){
-            //Collections.sort(rc);
-
             for (int i = 0; i < rc.size(); i++) {
                 for (int j = 0; j < rc.size()-1; j++) {
                     int num1 = rc.get(i);
@@ -73,8 +72,6 @@ public class Main {
         }
 
         private static ArrayList<Integer> sortElementsLTS(ArrayList<Integer> rc){
-            //Collections.reverse(rc);
-
             for (int i = 0; i < rc.size(); i++) {
                 for (int j = 0; j < rc.size()-1; j++) {
                     int num1 = rc.get(i);
@@ -177,13 +174,18 @@ public class Main {
             }
         }
 
-        private static int findStudentsFE(ArrayList<Integer> rc){
+        private static int FENum(){
             System.out.print("How many classes can be missed before a student FE's? ");
             int FE = in.nextInt();
+            return FE;
+        }
+
+        private static int findStudentsFE(ArrayList<Integer> rc){
+            num = FENum();
             int count = 0;
 
             for (int i = 0; i < rc.size(); i++) {
-                if (FE < rc.get(i)){
+                if (num < rc.get(i)){
                     System.out.println("Student " + i + " FE'ed");
                     count++;
                 }
@@ -195,8 +197,23 @@ public class Main {
             int FEedStudents = findStudentsFE(rc);
             double FEPercentage = ((double)FEedStudents/rc.size())*100;
 
-            System.out.printf("\nFormatted %d divided by %d is %.2f%%",
+            System.out.printf("\nFormatted %d divided by %d is %.2f%%\n",
                     FEedStudents, rc.size(), FEPercentage);
+        }
+
+        private static void nonFEStudentAverage(ArrayList<Integer> rc){
+            int count = 0;
+            int avg = 0;
+
+            for (int i = 0; i < rc.size(); i++) {
+                if (num > rc.get(i)){
+                    avg = avg + rc.get(i);
+                    count++;
+                }
+            }
+
+            int totavg = avg/count;
+            System.out.println("The avaerage of all non-FE'd students are " + totavg);
         }
 
     public static void main(String[] args) {
@@ -217,6 +234,7 @@ public class Main {
         findStudentsByAbsence(rollcall);
         printStudentsByAbsence();
         findPercentStudentsFE(rollcall);
+        nonFEStudentAverage(rollcall);
 
         updateElement(rollcall);
         System.out.println("Updated List:");
